@@ -51,7 +51,7 @@ class SQLHelper(object):
             cursor.close()
             conn.close()
         except Exception as e:
-            res = -1
+            res = 400
         return res
 
     @staticmethod
@@ -64,5 +64,18 @@ class SQLHelper(object):
             cursor.close()
             conn.close()
         except Exception as e:
-            res = -1
+            res = 400
+        return res
+
+    @staticmethod
+    def execute(sql, *args):
+        try:
+            conn = POOL.connection()
+            cursor = conn.cursor()
+            res = cursor.execute(sql, args)
+            conn.commit()
+            cursor.close()
+            conn.close()
+        except Exception as e:
+            res = 400
         return res

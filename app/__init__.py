@@ -20,7 +20,7 @@ cors.init_app(app=app, resources={r"/api/*": {"origins": "*"}})
 app.config.from_object('config')
 
 
-from app.admin import index, login
+from app.admin import index, login, tag
 
-for blueprint in [index, login]:
+for blueprint in [index, login, tag]:
     app.register_blueprint(blueprint, url_prefix='/api/v2/admin')
